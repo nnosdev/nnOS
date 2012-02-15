@@ -1,0 +1,13 @@
+
+
+Assemblieren:
+	nasm boot.s -f bin -o boot.bin
+
+Virtual-Floppy-Disk erstellen:
+	dd status=noxfer conv=notrunc if=boot.bin of=boot.flp
+
+Image erstellen:
+	genisoimage -o boot.img boot.flp
+
+Ausführen mit qemu:
+	qemu -fda boot.flp

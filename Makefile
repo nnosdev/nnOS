@@ -9,7 +9,7 @@ LD = ld
 
 ASFLAGS = -f elf
 CFLAGS = -m32 -Wall -g -fno-stack-protector -nostdinc
-LDFLAGS = -melf_i386 -Ttext=0x100000
+LDFLAGS = -melf_i386 -Tkernel.ld 
 
 nnOS: $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $^
@@ -18,12 +18,14 @@ nnOS: $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 %.o: %.S
-	$(AS) $^ $(ASFLAGS) -f elf -o $@
+	$(AS) $^ $(ASFLAGS) -o $@
 
 clean:
 	rm $(OBJS)
 	
 qemu:
-	qemu -kernel nnOS
+	clear
+	make
+	qemu -kernel nnOS -serial stdio
 
 .PHONY: clean

@@ -21,30 +21,23 @@ void startup(void) {
 	address = *ptraddr;
 
 	int a;
-
-	//print("hi");
-
 	for (a = 0; a < 3; a++) {
 		address = *ptraddr;
 
 		if (address != 0) {
 
-			//DEBUG("COM found write a letter: ");
 			SerialPort_Initialize(&port, address, 48, 0, 8);
 			SerialPort_Write(&port, 65);
 			DEBUG("\n");
-		} else {
-			//DEBUG("No COM found\n");
 		}
 
 		*ptraddr++;
 	}
 
-	print("yyyy%dyyA");
+	print("yyy%dy%byyA", 9, 2645);
 
 
-
-	DEBUG("still alive..\n");
+	DEBUG("\nend reached and still alive..\n");
 
 
 }

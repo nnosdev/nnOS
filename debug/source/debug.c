@@ -7,17 +7,10 @@
 
 #ifdef _DEBUG_H_
 
-/*void dprintf(char* c)
- {
- int i;
-
- for (i = 0; c[i] != '\0'; i++)
- {
- outb(0x3F8, c[i]);
- }
- }*/
-
-void dprintf(const char* c, ...)
+/*
+ *
+ */
+void dprint(const char* c, ...)
 {
 	int i;
 

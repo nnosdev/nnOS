@@ -10,13 +10,12 @@
 
 #else
 
-#define DEBUG(s) dprintf(s"\0")
-#define DEBUGX(s) dprintf(s)
+#define DEBUG(s) dprint(s"\0")
+#define DEBUGX(s) dprint(s)
 
 /**
  *
  */
-//void dprintf(char* c);
-void dprintf(const char* c, ...);
+void dprint(const char* c, ...);
 
 #endif // #ifdef _DEBUG_H_

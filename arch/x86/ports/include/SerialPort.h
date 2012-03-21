@@ -22,16 +22,16 @@
 typedef struct
 {
 	/* Base address of port */
-	uint16 base;
+	uint16 m_base;
 
 	/* Baud rate */
-	uint16 baud;
+	uint16 m_baud;
 
 	/* Parity */
-	byte parity;
+	byte m_parity;
 
 	/* Bits */
-	byte bits;
+	byte m_bits;
 
 } SerialPort;
 

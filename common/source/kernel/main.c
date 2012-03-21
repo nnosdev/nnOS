@@ -2,9 +2,11 @@
  *
  */
 
-#include "../../../debug/include/debug.h"
+#include "../../include/console/Terminal.h"
 #include "../../../arch/x86/ports/include/SerialPort.h"
+#include "../../../debug/include/debug.h"
 #include "../../../library/include/stdio.h"
+
 
 /*
  * startup is called in boot.S and starts up nnOS
@@ -34,7 +36,15 @@ void startup(void) {
 		*ptraddr++;
 	}
 
+	Terminal tm;
+
+
+
 	print("yyy%dy%byyA", 9, 2645);
+
+	Terminal_Initialize(&tm, LIGHTGREEN, BLACK);
+
+	print("relate this text to cursor position");
 
 
 	DEBUG("\nend reached and still alive..\n");

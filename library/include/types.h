@@ -2,8 +2,8 @@
  *
  */
 
-#ifndef _TYPES_
-#define _TYPES_
+#ifndef _TYPES_H_
+#define _TYPES_H_
 
 
 typedef unsigned char 		byte;
@@ -29,4 +29,4 @@ typedef uint32 				addr;
 typedef int32 				pid;
 
 
-#endif // #ifndef _TYPES_
+#endif // #ifndef _TYPES_H_

@@ -1,3 +1,6 @@
+/*
+ *
+ */
 #include "../include/types.h"
 
 #ifndef _STDIO_H_

@@ -1,12 +1,12 @@
+/*
+ *
+ */
 #include "../include/stdio.h"
-
-#include "../../debug/include/debug.h"
 
 /*
  *
  */
 void print(const char *chr, ...) {
-
 	int a = 0;
 	int *args = (int *) (&chr + 1);
 
@@ -46,7 +46,6 @@ void print(const char *chr, ...) {
 		} else {
 			printchar(*chr, 0xA, a, 0);
 		}
-
 		a++;
 		chr++;
 	}
@@ -88,7 +87,6 @@ void printnum(int num, uint16 base, byte flag) {
 	} else
 		while (num != 0) {
 			out[i++] = digits[num % base];
-			printchar(out[i], 0xA, 2, 2);
 			num = num / base;
 		}
 

@@ -31,3 +31,6 @@ _stop:
 section .bss
 resb 8192	; 8kB stack
 kernel_stack:
+
+
+

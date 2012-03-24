@@ -22,10 +22,15 @@ nnOS: $(OBJS)
 
 clean:
 	rm $(OBJS)
-	
+
+# Compiles and starts the kernel
 qemu:
 	clear
 	make
-	qemu -kernel nnOS -serial stdio
+	qemu -kernel nnOS -serial stdio -d int
+	
+# Generates a dump-file of the whole kernel
+odump:
+	objdump -S --disassemble-all nnOS -M intel > nnOSdump
 
 .PHONY: clean

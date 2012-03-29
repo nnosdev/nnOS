@@ -1,7 +1,7 @@
 /*
  *
  */
-#include "../include/types.h"
+#include "types.h"
 
 #ifndef _STDIO_H_
 #define _STDIO_H_

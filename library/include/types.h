@@ -24,7 +24,7 @@ typedef long long 			int64;
 typedef unsigned long long 	uint64;
 
 typedef unsigned char 		uchar;
-typedef uint32 				size;
+typedef uint32 				size_t;
 typedef uint32 				addr;
 typedef int32 				pid;
 

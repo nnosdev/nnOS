@@ -24,6 +24,9 @@ void startup(void) {
 	Gdt_Init();
 	Idt_Init();
 
+	asm volatile ("int $0x3");
+	asm volatile ("int $0x4");
+
 	dprint("end reached and still alive..");
 	print("end reached and still alive..");
 

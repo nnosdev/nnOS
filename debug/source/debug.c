@@ -60,7 +60,7 @@ void dprint(const char *chr, ...) {
 /*
  *
  */
-void dprintchar(const char chr, byte color, byte x, byte y) {
+void dprintchar(const char chr, byte_t color, byte_t x, byte_t y) {
 
 	outb(0x3F8, chr);
 }
@@ -68,7 +68,7 @@ void dprintchar(const char chr, byte color, byte x, byte y) {
 /*
  *
  */
-void dprintnum(int num, uint16 base, byte flag) {
+void dprintnum(int num, uint16_t base, byte_t flag) {
 
 	const char *digits;
 	static const char small_digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";

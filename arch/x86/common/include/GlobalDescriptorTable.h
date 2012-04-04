@@ -13,7 +13,7 @@
 
 #define ACC_PRES(x) (((x) << 0x07) & 0x80) // Present-Bit: 1 for active entry
 #define ACC_RING(x) (((x) << 0x05) & 0x60) // Privilege: Ring 0 to 3
-#define ACC_TYPE(x) (((x) << 0x4) & 0x10) // Type: 1 for Code/Data segment 0 for system
+#define ACC_TYPE(x) (((x) << 0x4) & 0x10)  // Type: 1 for Code/Data segment 0 for system
 
 #define ACC_DATA_RD        0x00 // Read-Only
 #define ACC_DATA_RDA       0x01 // Read-Only, accessed
@@ -51,16 +51,17 @@
 						| ACC_DATA_RDWR
 
 #define GDT_FLG FLG_GRAN(1) | FLG_SIZE(1) | FLG_LONG(0) | FLG_AVL(0)
+
 /*
  *
  */
 struct gdt_entry_struct {
-	uint16 limit_low;
-	uint16 base_low;
-	uint8 base_middle;
-	uint8 access;
-	uint8 granularity;
-	uint8 base_high;
+	uint16_t limit_low;
+	uint16_t base_low;
+	uint8_t base_middle;
+	uint8_t access;
+	uint8_t granularity;
+	uint8_t base_high;
 }__attribute__ ((packed));
 typedef struct gdt_entry_struct gdt_entry;
 
@@ -76,32 +77,22 @@ typedef struct gdt_entry_container_struct gdt_entry_container;
  *
  */
 struct gdt_ptr_struct {
-	uint16 limit;
-	uint32 base;
+	uint16_t limit;
+	uint32_t base;
 } __attribute__ ((packed));
 typedef struct gdt_ptr_struct gdt_ptr_s;
 
-static gdt_entry_container gdt;
-static gdt_ptr_s gdt_ptr;
+
 
 
 // ASM function Gdt_Flush() can be found in gdt.S
-extern void Gdt_Flush(uint32);
+extern void Gdt_Flush(uint32_t);
 
 /*
  *
  */
 void Gdt_Init();
 
-/*
- *
- */
-static void Gdt_SetEntry(uint32 index,
-		uint32 base, uint32 limit, uint8 access, uint8 gran);
 
-/*
- *
- */
-static void Gdt_InstallEntries();
 
 #endif // #ifndef _GDT_H_

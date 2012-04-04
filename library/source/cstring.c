@@ -7,12 +7,12 @@
 /*
  *
  */
-void* memset(void *ptr, uint32 value, size_t bytes)
+void* memset(void *ptr, uint32_t value, size_t bytes)
 {
 	if(bytes < 1)
 		return 0;
 
-	uint8 *pt = (uint8) ptr;
+	uint8_t *pt = (uint8_t) ptr;
 
 	while(bytes) {
 		*pt = value;

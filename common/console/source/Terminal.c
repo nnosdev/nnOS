@@ -1,4 +1,4 @@
-#include "../../include/console/Terminal.h"
+#include "../include/Terminal.h"
 
 
 /*
@@ -25,8 +25,8 @@ void Terminal_ClearContent(Terminal *self)
 	// Clear screen
 	for(x = 0; x < MAXCOLS; x++) {
 		for(y = 0; y < MAXROWDISPLAY; y++) {
-			self->m_content = ((uint16*) TERMINALBASE) + y * 80 + x;
-			*self->m_content = (((uint16)self->m_fontcolor) << 8);
+			self->m_content = ((uint16_t*) TERMINALBASE) + y * 80 + x;
+			*self->m_content = (((uint16_t)self->m_fontcolor) << 8);
 		}
 	}
 }
@@ -40,9 +40,9 @@ void Terminal_UpdateCursor(Terminal *self)
 
 	// Cursor high-port to VGA index-register
 	outb(0x3D4, 14);
-	outb(0x3D5, (byte)(pos >> 8) & 0xFF);
+	outb(0x3D5, (byte_t)(pos >> 8) & 0xFF);
 
 	// Cursor low-port to VGA index-register
 	outb(0x3D4, 15);
-	outb(0x3D5, (byte)(pos & 0xFF));
+	outb(0x3D5, (byte_t)(pos & 0xFF));
 }

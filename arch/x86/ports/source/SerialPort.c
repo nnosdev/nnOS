@@ -3,8 +3,8 @@
 /*
  *
  */
-void SerialPort_Initialize(SerialPort *self, uint16 base, uint16 baud,
-		byte parity, byte bits) {
+void SerialPort_Initialize(SerialPort *self, uint16_t base, uint16_t baud,
+		byte_t parity, byte_t bits) {
 
 	// Store configuration
 	self->m_base = base;
@@ -13,8 +13,8 @@ void SerialPort_Initialize(SerialPort *self, uint16 base, uint16 baud,
 	self->m_bits = bits;
 
 	union {
-		uint8 b[2];
-		uint16 w;
+		uint8_t b[2];
+		uint16_t w;
 	} divisor;
 
 	divisor.w = 115200 / baud;
@@ -45,7 +45,7 @@ void SerialPort_Initialize(SerialPort *self, uint16 base, uint16 baud,
 /*
  *
  */
-uint8 SerialPort_Read(SerialPort *self) {
+uint8_t SerialPort_Read(SerialPort *self) {
 	while (SerialPort_Received(self)) { /* Do nothing */
 	}
 
@@ -55,7 +55,7 @@ uint8 SerialPort_Read(SerialPort *self) {
 /*
  *
  */
-void SerialPort_Write(SerialPort *self, byte bits) {
+void SerialPort_Write(SerialPort *self, byte_t bits) {
 	while (SerialPort_TransmitEmpty(self) == 0) { /* Do nothing */
 	}
 
@@ -65,13 +65,13 @@ void SerialPort_Write(SerialPort *self, byte bits) {
 /*
  *
  */
-uint8 SerialPort_Received(SerialPort *self) {
+uint8_t SerialPort_Received(SerialPort *self) {
 	return inb(self->m_base + LSR) & 0x1;
 }
 
 /*
  *
  */
-uint8 SerialPort_TransmitEmpty(SerialPort *self) {
+uint8_t SerialPort_TransmitEmpty(SerialPort *self) {
 	return inb(self->m_base + LSR) & 0x20;
 }

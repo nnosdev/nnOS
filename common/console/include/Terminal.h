@@ -20,8 +20,8 @@
 /* Possible colors for text displayed */
 typedef struct
 {
-	uint8 x;
-	uint8 y;
+	uint8_t x;
+	uint8_t y;
 } Position8;
 
 // Allowed color-codes
@@ -53,13 +53,13 @@ typedef struct
 
 	// Contains 25 rows that will be displayed and
 	// additional 75 rows as buffer for scrolling
-	uint16 *m_content;
+	uint16_t *m_content;
 
 	// Displayed font-color
-	uint8 m_fontcolor;
+	uint8_t m_fontcolor;
 
 	// Displayed background color
-	uint8 m_bgcolor;
+	uint8_t m_bgcolor;
 
 
 

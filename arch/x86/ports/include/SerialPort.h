@@ -22,43 +22,43 @@
 typedef struct
 {
 	/* Base address of port */
-	uint16 m_base;
+	uint16_t m_base;
 
 	/* Baud rate */
-	uint16 m_baud;
+	uint16_t m_baud;
 
 	/* Parity */
-	byte m_parity;
+	byte_t m_parity;
 
 	/* Bits */
-	byte m_bits;
+	byte_t m_bits;
 
 } SerialPort;
 
 /*
  *
  */
-void SerialPort_Initialize(SerialPort *self, uint16 base, uint16 baud, byte parity, byte bits);
+void SerialPort_Initialize(SerialPort *self, uint16_t base, uint16_t baud, byte_t parity, byte_t bits);
 
 /*
  *
  */
-uint8 SerialPort_Read(SerialPort *self);
+uint8_t SerialPort_Read(SerialPort *self);
 
 /*
  *
  */
-void SerialPort_Write(SerialPort *self, byte bits);
+void SerialPort_Write(SerialPort *self, byte_t bits);
 
 /*
  *
  */
-uint8 SerialPort_Received(SerialPort *self);
+uint8_t SerialPort_Received(SerialPort *self);
 
 /*
  *
  */
-uint8 SerialPort_TransmitEmpty(SerialPort *self);
+uint8_t SerialPort_TransmitEmpty(SerialPort *self);
 
 
 #endif // #ifndef _SERIAL_PORT_H_

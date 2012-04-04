@@ -3,6 +3,20 @@
  */
 #include "../include/GlobalDescriptorTable.h"
 
+static gdt_entry_container gdt;
+static gdt_ptr_s gdt_ptr;
+
+/*
+ *
+ */
+static void Gdt_SetEntry(uint32_t index,
+		uint32_t base, uint32_t limit, uint8_t access, uint8_t gran);
+
+/*
+ *
+ */
+static void Gdt_InstallEntries();
+
 
 
 
@@ -14,8 +28,8 @@ void Gdt_Init() {
 /*
  *
  */
-static void Gdt_SetEntry(uint32 index, uint32 base, uint32 limit, uint8 access,
-		uint8 gran) {
+static void Gdt_SetEntry(uint32_t index, uint32_t base, uint32_t limit, uint8_t access,
+		uint8_t gran) {
 
 	gdt.entry[index].limit_low = (limit & 0xFFFF);
 
@@ -56,7 +70,7 @@ static void Gdt_InstallEntries() {
 	dprint("[GDT] entry 4 0x%X", &gdt.entry[3]);
 	dprint("[GDT] entry 5 0x%X", &gdt.entry[4]);
 
-	Gdt_Flush((uint32) &gdt_ptr);
+	Gdt_Flush((uint32_t) &gdt_ptr);
 
 	dprint("[GDT] Returning from Gdt_Flush()");
 }

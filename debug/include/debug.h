@@ -26,7 +26,7 @@
 #define DEBUG(s) dprint(s)
 
 
-static const byte DLARGECHARS = 0x01;
+static const byte_t DLARGECHARS = 0x01;
 
 
 /**
@@ -37,12 +37,12 @@ void dprint(const char* chr, ...);
 /*
  *
  */
-void dprintchar(const char chr, byte color, byte x, byte y);
+void dprintchar(const char chr, byte_t color, byte_t x, byte_t y);
 
 /*
  *
  */
-void dprintnum(int num, uint16 base, byte flag);
+void dprintnum(int num, uint16_t base, byte_t flag);
 
 #endif // #ifndef _DEBUG_H_
 

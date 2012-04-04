@@ -23,10 +23,10 @@ Idt_Flush:
    	ret
 
 
-extern isr_handler
+extern Isr_Handler
 
 
-%macro ISR_NOERRCODE 1
+%macro isr_stub 1
 global isr%1
 isr%1:
 	cli
@@ -35,7 +35,7 @@ isr%1:
 	jmp isr_common_stub
 %endmacro
 
-%macro ISR_ERRCODE 1
+%macro isr_stub_error 1
 global isr%1
 isr%1:
 	cli
@@ -56,7 +56,7 @@ isr_common_stub:
 	mov fs, ax
 	mov gs, ax
 
-	call isr_handler
+	call Isr_Handler
 
 	pop eax			; Reload the original data segment descriptor
 	mov ds, ax
@@ -66,41 +66,61 @@ isr_common_stub:
 
 	popa				; Pops edi, esi, ebp,..
 	add esp, 8		; Cleans up the pushed error code and ISR number
-	sti
+	sti				; Enable interrupts
 	iret			; Pops CS, EIP, EFLAGS, SS and ESP at once
 
 
-ISR_NOERRCODE 0
-ISR_NOERRCODE 1
-ISR_NOERRCODE 2
-ISR_NOERRCODE 3
-ISR_NOERRCODE 4
-ISR_NOERRCODE 5
-ISR_NOERRCODE 6
-ISR_NOERRCODE 7
-ISR_ERRCODE 8
-ISR_ERRCODE 9
-ISR_ERRCODE 10
-ISR_ERRCODE 11
-ISR_ERRCODE 12
-ISR_ERRCODE 13
-ISR_ERRCODE 14
-ISR_NOERRCODE 15
-ISR_NOERRCODE 16
-ISR_NOERRCODE 17
-ISR_NOERRCODE 18
-ISR_NOERRCODE 19
-ISR_NOERRCODE 20
-ISR_NOERRCODE 21
-ISR_NOERRCODE 22
-ISR_NOERRCODE 23
-ISR_NOERRCODE 24
-ISR_NOERRCODE 25
-ISR_NOERRCODE 26
-ISR_NOERRCODE 27
-ISR_NOERRCODE 28
-ISR_NOERRCODE 29
-ISR_NOERRCODE 30
-ISR_NOERRCODE 31
+isr_stub 0
+isr_stub 1
+isr_stub 2
+isr_stub 3
+isr_stub 4
+isr_stub 5
+isr_stub 6
+isr_stub 7
+isr_stub_error 8
+isr_stub 9
+isr_stub_error 10
+isr_stub_error 11
+isr_stub_error 12
+isr_stub_error 13
+isr_stub_error 14
+isr_stub 15
+isr_stub 16
+isr_stub_error 17
+isr_stub 18
+isr_stub 19
+isr_stub 20
+isr_stub 21
+isr_stub 22
+isr_stub 23
+isr_stub 24
+isr_stub 25
+isr_stub 26
+isr_stub 27
+isr_stub 28
+isr_stub 29
+isr_stub 30
+isr_stub 31
+
+; IRQs
+isr_stub 32 ; IRQ 0
+isr_stub 33 ; IRQ 1
+isr_stub 34 ; IRQ 2
+isr_stub 35 ; IRQ 3
+isr_stub 36 ; IRQ 4
+isr_stub 37 ; IRQ 5
+isr_stub 38 ; IRQ 6
+isr_stub 39 ; IRQ 7
+isr_stub 40 ; IRQ 8
+isr_stub 41 ; IRQ 9
+isr_stub 42 ; IRQ 10
+isr_stub 43 ; IRQ 11
+isr_stub 44 ; IRQ 12
+isr_stub 45 ; IRQ 13
+isr_stub 46 ; IRQ 14
+isr_stub 47 ; IRQ 15
+
+isr_stub 48 ; System calls
 
 

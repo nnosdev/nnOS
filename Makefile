@@ -1,4 +1,4 @@
-# Main Makefile
+# Main Makefile 
 
 SRCS = $(shell find -name '*.[cS]')
 OBJS = $(addsuffix .o,$(basename $(SRCS)))
@@ -13,7 +13,6 @@ CFLAGS = -m32 -Wall -g -fno-stack-protector -nostdinc -nostdlib -nodefaultlibs #
 LDFLAGS = -melf_i386 -Tkernel.ld 
 
 nnOS: $(OBJS)
-	#$(LD) $(LDFLAGS) -o $@ $^
 	$(LD) $(LDFLAGS) -o nnOS $(OBJ)
 
 %.o: %.c
@@ -24,9 +23,7 @@ nnOS: $(OBJS)
 	$(AS) $^ $(ASFLAGS) -o $@
 	mv $@ objects
 
-
 clean:
-	#rm $(OBJS)
 	rm $(OBJ)
 
 # Compiles and starts the kernel
@@ -34,6 +31,22 @@ qemu:
 	make
 	clear
 	qemu -kernel nnOS -serial stdio -d int
+	make odump
+
+# Compiles and starts the kernel. Delivers detailed assembler information
+# in qemu.log
+asm:
+	make
+	clear
+	qemu -kernel nnOS -serial stdio -d in_asm
+	make odump
+
+# Compiles and starts the kernel and waits for gdb connection
+gdb:
+	make
+	clear
+	qemu -s -S -kernel nnOS -serial stdio -d int
+	make odump
 	
 # Target needed for Eclipse
 all:

@@ -48,11 +48,11 @@
  */
 struct idt_entry_struct
 {
-	uint16_t base_lo; // Lower 16 bit of address to jump to when int fires
+	uint16_t base_lo; 	// Lower 16 bit of address to jump to when int fires
 	uint16_t sel;		// Kernel segment selector
 	uint8_t ist;		// Always zero
-	uint8_t flags;	// Flags (see documentation)
-	uint16_t base_hi; // Upper 16 bit of address to jump to when int fires
+	uint8_t flags;		// Flags (see documentation)
+	uint16_t base_hi; 	// Upper 16 bit of address to jump to when int fires
 } __attribute__((packed));
 typedef struct idt_entry_struct idt_entry;
 

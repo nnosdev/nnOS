@@ -45,29 +45,20 @@ isr%1:
 
 
 isr_common_stub:
-	pusha				; Pushes edi, esi, ebp, esp, ebx, edx, ecx, eax
+	pusha
+	push eax
 
-	mov ax, ds			; Lower 16-bits of eax = ds
-	push eax			; Save the data segment descriptor
-
-	mov ax, 0x10	; Load the kernel data segment descriptor
-	mov ds, ax
-	mov es, ax
-	mov fs, ax
-	mov gs, ax
-
+	push esp 			; pointer to cpu_state struct
 	call Isr_Handler
+	mov esp, eax
 
-	pop eax			; Reload the original data segment descriptor
-	mov ds, ax
-	mov es, ax
-	mov fs, ax
-	mov gs, ax
+	pop eax
+	popa
 
-	popa				; Pops edi, esi, ebp,..
-	add esp, 8		; Cleans up the pushed error code and ISR number
-	sti				; Enable interrupts
-	iret			; Pops CS, EIP, EFLAGS, SS and ESP at once
+	add esp, 8
+	sti 				; enable interrupts
+	iret				; interrupt return
+
 
 
 isr_stub 0

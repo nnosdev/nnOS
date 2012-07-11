@@ -33,7 +33,12 @@ void Idt_Init()
 
 	Idt_MapPicInterruptPorts();
 	Idt_InstallEntries();
+}
 
+/*
+ *
+ */
+void Idt_EnableHardwareInterrupts() {
 	// Enable interrupts
 	asm volatile("sti");
 }

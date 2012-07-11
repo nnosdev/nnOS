@@ -1,11 +1,6 @@
 /*
  *
  */
-#include "../../library/include/types.h"
-#include "../../arch/x86/ports/include/Ports.h"
-
-
-
 #define DEBUG_MODE
 
 #ifndef DEBUG_MODE
@@ -16,6 +11,9 @@
 
 #ifndef _DEBUG_H_
 #define _DEBUG_H_
+
+#include "../../library/include/types.h"
+#include "../../arch/x86/ports/include/Ports.h"
 
 
 /*

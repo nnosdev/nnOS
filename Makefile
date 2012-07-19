@@ -47,10 +47,15 @@ gdb:
 	clear
 	qemu -s -S -kernel nnOS -serial stdio -d int
 	make odump
+
+# Updates the documentation of nnOS. 
+doxy:
+	doxygen docs/doxycfg
 	
 # Target needed for Eclipse
 all:
 	make
+	qemu -s -S -kernel nnOS -serial stdio -d int
 
 # Starts the kernel without compiling
 fast:

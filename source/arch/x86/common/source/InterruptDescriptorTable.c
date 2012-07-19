@@ -9,7 +9,7 @@ static idt_ptr_s idt_ptr;
 /*
  *
  */
-static void Idt_MapPicInterruptPorts();
+static void Idt_MapPicInterruptPorts(void);
 
 /*
  *
@@ -19,7 +19,7 @@ static void Idt_SetEntry(uint8_t index, uint32_t base, uint16_t sel, uint16_t fl
 /*
  *
  */
-static void Idt_InstallEntries();
+static void Idt_InstallEntries(void);
 
 
 
@@ -27,7 +27,7 @@ static void Idt_InstallEntries();
 /*
  *
  */
-void Idt_Init()
+void Idt_Init(void)
 {
 	dprint("[IDT] Initializing IDT");
 
@@ -38,7 +38,7 @@ void Idt_Init()
 /*
  *
  */
-void Idt_EnableHardwareInterrupts() {
+void Idt_EnableHardwareInterrupts(void) {
 	// Enable interrupts
 	asm volatile("sti");
 }
@@ -46,7 +46,7 @@ void Idt_EnableHardwareInterrupts() {
 /*
  *
  */
-static void Idt_MapPicInterruptPorts()
+static void Idt_MapPicInterruptPorts(void)
 {
 	dprint("[IDT] Initialize Programmable Interrupt Controller");
 
@@ -89,7 +89,7 @@ static void Idt_SetEntry(uint8_t index, uint32_t base, uint16_t sel, uint16_t fl
 /*
  *
  */
-static void Idt_InstallEntries()
+static void Idt_InstallEntries(void)
 {
 	idt_ptr.limit = (IDT_ENTRIES * sizeof(idt_entry)) - 1;
 	idt_ptr.base = (int) &idt.entry[0];

@@ -84,61 +84,66 @@ extern Idt_Flush(uint32_t ptr);
 /*
  *
  */
-void Idt_Init();
+void Idt_Init(void);
+
+/*
+ *
+ */
+void Idt_EnableHardwareInterrupts(void);
 
 
 // TODO Clean this up by writing a macro
-extern void  isr0 ();
-extern void  isr1 ();
-extern void  isr2 ();
-extern void  isr3 ();
-extern void  isr4 ();
-extern void  isr5 ();
-extern void  isr6 ();
-extern void  isr7 ();
-extern void  isr8 ();
-extern void  isr9 ();
-extern void isr10 ();
-extern void isr11 ();
-extern void isr12 ();
-extern void isr13 ();
-extern void isr14 ();
-extern void isr15 ();
-extern void isr16 ();
-extern void isr17 ();
-extern void isr18 ();
-extern void isr19 ();
-extern void isr20 ();
-extern void isr21 ();
-extern void isr22 ();
-extern void isr23 ();
-extern void isr24 ();
-extern void isr25 ();
-extern void isr26 ();
-extern void isr27 ();
-extern void isr28 ();
-extern void isr29 ();
-extern void isr30 ();
-extern void isr31 ();
+extern void  isr0 (void);
+extern void  isr1 (void);
+extern void  isr2 (void);
+extern void  isr3 (void);
+extern void  isr4 (void);
+extern void  isr5 (void);
+extern void  isr6 (void);
+extern void  isr7 (void);
+extern void  isr8 (void);
+extern void  isr9 (void);
+extern void isr10 (void);
+extern void isr11 (void);
+extern void isr12 (void);
+extern void isr13 (void);
+extern void isr14 (void);
+extern void isr15 (void);
+extern void isr16 (void);
+extern void isr17 (void);
+extern void isr18 (void);
+extern void isr19 (void);
+extern void isr20 (void);
+extern void isr21 (void);
+extern void isr22 (void);
+extern void isr23 (void);
+extern void isr24 (void);
+extern void isr25 (void);
+extern void isr26 (void);
+extern void isr27 (void);
+extern void isr28 (void);
+extern void isr29 (void);
+extern void isr30 (void);
+extern void isr31 (void);
 
 // IRQ 0-15
-extern void isr32 ();
-extern void isr33 ();
-extern void isr34 ();
-extern void isr35 ();
-extern void isr36 ();
-extern void isr37 ();
-extern void isr38 ();
-extern void isr39 ();
-extern void isr40 ();
-extern void isr41 ();
-extern void isr42 ();
-extern void isr43 ();
-extern void isr44 ();
-extern void isr45 ();
-extern void isr46 ();
-extern void isr47 ();
+extern void isr32 (void);
+extern void isr33 (void);
+extern void isr34 (void);
+extern void isr35 (void);
+extern void isr36 (void);
+extern void isr37 (void);
+extern void isr38 (void);
+extern void isr39 (void);
+extern void isr40 (void);
+extern void isr41 (void);
+extern void isr42 (void);
+extern void isr43 (void);
+extern void isr44 (void);
+extern void isr45 (void);
+extern void isr46 (void);
+extern void isr47 (void);
 
-extern void isr48 (); // System calls
+extern void isr48 (void); // Reserved for system calls
 
 #endif // #ifndef _IDT_H

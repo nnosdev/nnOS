@@ -55,7 +55,7 @@ doxy:
 # Target needed for Eclipse
 all:
 	make
-	qemu-system-x86_64 -kernel nnOS -serial stdio -d int
+	qemu-system-x86_64 -s -S -kernel nnOS -serial stdio -d int
 
 # Starts the kernel without compiling
 fast:

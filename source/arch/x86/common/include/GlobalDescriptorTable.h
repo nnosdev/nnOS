@@ -8,7 +8,7 @@
 #ifndef _GDT_H_
 #define _GDT_H_
 
-#define GDT_ENTRIES 5
+#define GDT_ENTRIES 6
 
 
 #define ACC_PRES(x) (((x) << 0x07) & 0x80) // Present-Bit: 1 for active entry
@@ -37,7 +37,11 @@
 #define FLG_LONG(x) (((x) << 0x01) & 0x02) // Long Mode: 0: ProtectedM 1: LongM
 #define FLG_AVL(x) ((x) & 0x01) // Not used
 
+
+
 /* The access-byte */
+#define GDT_FLG_TSS 0x09
+
 #define GDT_ACC_R0_CODE ACC_PRES(1) | ACC_RING(0) | ACC_TYPE(1) \
 						| ACC_CODE_EXRD
 
@@ -51,6 +55,53 @@
 						| ACC_DATA_RDWR
 
 #define GDT_FLG FLG_GRAN(1) | FLG_SIZE(1) | FLG_LONG(0) | FLG_AVL(0)
+
+#define GDT_TSS GDT_FLG_TSS | ACC_RING(3) | ACC_PRES(1)
+
+
+/*
+ *
+ */
+struct tss_entry_struct {
+  uint16_t prev_tss;
+
+  // loaded when program switches to kernel mode
+  uint32_t esp0;  // kernel mode (ring0) stack pointer
+  uint16_t ss0;   // kernel mode (ring0) segment
+
+  uint32_t esp1;
+  uint16_t ss1;
+
+  uint32_t esp2;
+  uint16_t ss2;
+
+  uint32_t cr3;
+  uint32_t eip;
+  uint32_t eflags;
+  uint32_t eax;
+  uint32_t ecx;
+  uint32_t edx;
+  uint32_t ebx;
+
+  uint32_t esp;
+  uint32_t ebp;
+  uint32_t esi;
+  uint32_t edi;
+
+  uint16_t es;
+  uint16_t cs;
+  uint16_t ss;
+  uint16_t ds;
+  uint16_t fs;
+  uint16_t gs;
+
+  uint32_t ldt; // unused
+
+  uint16_t trap;
+  uint16_t iomap_base;
+} __attribute__((packed));
+typedef struct tss_entry_struct tss_entry_t;
+
 
 /*
  *

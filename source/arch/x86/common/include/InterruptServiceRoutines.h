@@ -9,10 +9,13 @@
 /*
  *
  */
-typedef struct cpu_state_struct {
+typedef struct cpu_state_struct
+{
+  // Order DOES matter here
+
 	uint32_t ds; // Data segment selector
 
-	// Pushed by pusha/popped by popa
+	// Pushed by pusha/popped by popa in that order
 	uint32_t edi;
 	uint32_t esi;
 	uint32_t ebp;
@@ -21,8 +24,6 @@ typedef struct cpu_state_struct {
 	uint32_t edx;
 	uint32_t ecx;
 	uint32_t eax;
-
-
 
 	uint32_t int_no, err_code; // Interrupt number and error code (if applicable)
 	uint32_t eip, cs, eflags, useresp, ss; // Pushed by the processor automatically.

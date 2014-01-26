@@ -5,7 +5,7 @@ Gdt_Flush:
 	mov eax, [esp+4] 	; Get the pointer to the GDT, passed as parameter
 	lgdt [eax]			; Load new GDT Pointer
 
-	mov ax, 0x10		; 0x10 is the offset in the GDT to out data segment
+	mov ax, 0x10		; 0x10 is the offset in the GDT to our data segment
 	mov ds, ax			; Load all data segment selectors
 	mov es, ax
 	mov fs, ax
@@ -45,21 +45,50 @@ isr%1:
 
 
 isr_common_stub:
-	pusha
+
+	; save cpu state by pushing
+	; main purpose registers onto the stack
+	pusha  ; push eax
+		   ; push ecx
+		   ; push edx
+		   ; push ebx
+		   ; push esp
+		   ; push ebp
+		   ; push esi
+		   ; push edi
+
+	mov eax, ds
 	push eax
 
-	push esp 			; pointer to cpu_state struct
-	call Isr_Handler
+	mov eax, 0x10
+	mov ds, eax
+    mov es, eax
+    mov fs, eax
+	mov gs, eax
+
+	push esp ; parameter cpu_state*
+	call Isr_Handler ; call interrupt handler
 	mov esp, eax
 
 	pop eax
-	popa
+	mov ds, eax
+    ;mov es, eax
+    ;mov fs, eax
+	;mov gs, eax
 
-	add esp, 8
+	popa ; pop edi
+		 ; pop esi
+		 ; pop ebp
+		 ; pop esp
+		 ; pop ebx
+		 ; pop edx
+		 ; pop ecx
+		 ; pop eax
+
+	add esp, 8	; pop error code, interrupt number
 	sti 				; enable interrupts
+
 	iret				; interrupt return
-
-
 
 isr_stub 0
 isr_stub 1

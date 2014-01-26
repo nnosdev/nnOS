@@ -42,17 +42,20 @@ cpu_state* Scheduler_Schedule(Scheduler *self, cpu_state *state)
 	current_task++;
 	current_task %= num_tasks;
 
-	dprint("[Scheduler] Schedule to task %d next instruction 0x%X", current_task, state->eip);
+	dprint("[Scheduler] Schedule to task %d next instruction 0x%X",
+	    current_task, state->eip);
 
 	dprint("     INT: %d, RING: %d, ERRCODE: 0x%X\n"
 					"\n"
 					"     EAX: 0x%X EBP: 0x%X EBX: 0x%X ECX: 0x%X\n"
 					"     EDI: 0x%X EDX: 0x%X EIP: 0x%X ESI: 0x%X\n"
 					"     ESP: 0x%X EFLAGS: 0x%X\n"
-					"     CS:  0x%X DS:  0x%X SS:  0x%X\n", state->int_no,
-					state->useresp, state->err_code, state->eax, state->ebp, state->ebx,
-					state->ecx, state->edi, state->edx, state->eip, state->esi,
-					state->esp, state->eflags, state->cs, state->ds, state->ss);
+					"     CS:  0x%X DS:  0x%X SS:  0x%X\n",
+					state->int_no, state->useresp, state->err_code,
+					state->eax,    state->ebp,     state->ebx,      state->ecx,
+					state->edi,    state->edx,     state->eip,      state->esi,
+					state->esp,    state->eflags,
+					state->cs,     state->ds,      state->ss);
 
 	state = self->thread_states[current_task];
 

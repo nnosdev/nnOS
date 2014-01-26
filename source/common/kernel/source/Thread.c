@@ -20,18 +20,17 @@ cpu_state* Thread_Init(Thread *self, uint32_t *entry, uint8_t *stack)
 			.esi = 0,
 			.edi = 0,
 			.ebp = 0,
-			// .esp = unused (no ring change yet)
+			.esp = (uint32_t) stack,
 			.eip = (uint32_t) entry,
 
 			/* Ring-0-Segmentregister */
 			.cs = 0x08,
-			//.ss = unused (no ring change yet)
+			.ss = 0x20,
 
 			/* Turn on IRQ (IF = 1) */
 			.eflags = 0x202,
 
-			//.usersp = 0,
-			.ss = 0
+			//.useresp = 0,
 	};
 
 	/*

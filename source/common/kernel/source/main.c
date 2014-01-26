@@ -34,7 +34,6 @@ Scheduler *scheduler;
 
 
 
-
 /*
  * startup is called in boot.S and starts up nnOS
  */

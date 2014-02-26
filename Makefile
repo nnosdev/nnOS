@@ -31,7 +31,6 @@ qemu:
 	make
 	clear
 	qemu-system-i386 -kernel nnOS -serial stdio -d int
-	make odump
 
 # Compiles and starts the kernel. Delivers detailed assembler information
 # in qemu.log
@@ -39,14 +38,12 @@ asm:
 	make
 	clear
 	qemu-system-i386 -kernel nnOS -serial stdio -d in_asm
-	make odump
 
 # Compiles and starts the kernel and waits for gdb connection
 gdb:
 	make
 	clear
 	qemu-system-i386 -s -S -kernel nnOS -serial stdio -d int
-	make odump
 
 # Updates the documentation of nnOS. 
 doxy:

@@ -14,7 +14,9 @@
 #include "../../../library/include/stdio.h"
 
 static uint8_t stack_a[STACK_SIZE];
+static uint8_t stack_a_user[STACK_SIZE];
 static uint8_t stack_b[STACK_SIZE];
+static uint8_t stack_b_user[STACK_SIZE];
 
 void task_a(void)
 {
@@ -51,8 +53,8 @@ void startup(void) {
 
 	Thread init_threads[2];
 	cpu_state *init_states[2];
-	init_states[0] = Thread_Init(&init_threads[0], (uint32_t*)&task_a, stack_a);
-	init_states[1] = Thread_Init(&init_threads[1], (uint32_t*)&task_b, stack_b);
+	init_states[0] = Thread_Init(&init_threads[0], (uint32_t*)&task_a, stack_a, stack_a_user);
+	init_states[1] = Thread_Init(&init_threads[1], (uint32_t*)&task_b, stack_b, stack_b_user);
 
 	Scheduler_Init(scheduler, init_states, 2);
 

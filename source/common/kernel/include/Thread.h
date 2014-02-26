@@ -23,7 +23,7 @@ typedef struct
 /*
  *
  */
-cpu_state* Thread_Init(Thread *self, uint32_t *entry, uint8_t *stack);
+cpu_state* Thread_Init(Thread *self, uint32_t *entry, uint8_t *stack, uint8_t *user_stack);
 
 
 #endif // #ifndef _THREAD_H_

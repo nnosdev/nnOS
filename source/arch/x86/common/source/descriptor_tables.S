@@ -23,7 +23,7 @@ Idt_Flush:
    	ret
 
 
-extern Isr_Handler
+
 
 
 %macro isr_stub 1
@@ -43,47 +43,47 @@ isr%1:
 	jmp isr_common_stub
 %endmacro
 
-
+extern Isr_Handler
 isr_common_stub:
 
 	; save cpu state by pushing
 	; main purpose registers onto the stack
-	pusha  ; push eax
-		   ; push ecx
-		   ; push edx
-		   ; push ebx
-		   ; push esp
-		   ; push ebp
-		   ; push esi
-		   ; push edi
+	pusha  		; push eax
+		   		; push ecx
+		   		; push edx
+		   		; push ebx
+		   		; push esp
+		   		; push ebp
+		   		; push esi
+		   		; push edi
+	mov eax, ds ; push ds
+	push eax 	;
 
-	mov eax, ds
-	push eax
+	mov ax, 0x10
+	mov ds, ax
+	mov es, ax
 
-	mov eax, 0x10
-	mov ds, eax
-    mov es, eax
-    mov fs, eax
-	mov gs, eax
 
-	push esp ; parameter cpu_state*
-	call Isr_Handler ; call interrupt handler
-	mov esp, eax
+	push esp 			; parameter cpu_state*
+	call Isr_Handler 	; call interrupt handler
+	mov esp, eax 		; eax contains stack pointer of executing task
+						; (think about it)
 
-	pop eax
-	mov ds, eax
-    ;mov es, eax
-    ;mov fs, eax
-	;mov gs, eax
 
-	popa ; pop edi
-		 ; pop esi
-		 ; pop ebp
-		 ; pop esp
-		 ; pop ebx
-		 ; pop edx
-		 ; pop ecx
-		 ; pop eax
+	mov ax, 0x23
+	mov ds, ax
+	mov es, ax
+
+	pop eax 	; pop ds
+
+	popa 		; pop edi
+		 		; pop esi
+		 		; pop ebp
+			 	; pop esp
+		 		; pop ebx
+		 		; pop edx
+		 		; pop ecx
+		 		; pop eax
 
 	add esp, 8	; pop error code, interrupt number
 	sti 				; enable interrupts

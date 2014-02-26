@@ -46,15 +46,16 @@ cpu_state* Isr_Handler(cpu_state *state) {
 	          state->esp,    state->eflags,
 	          state->cs,     state->ds,      state->ss);
 
-	  //uint32_t tss[32] = { 0x00, 0x00, 0x10 };
 
 		// Call Scheduler
 		if (state->int_no == 0x20) {
+
 			state = Scheduler_Schedule(scheduler, state);
+			tss_entry.esp0 = (uint32_t) (state + 1);
 		}
 
 		if (state->int_no >= 0x28) {
-			// TODO Keyboard driver
+		  // Keyboard
 			outb(0xA0, 0x20);
 		}
 

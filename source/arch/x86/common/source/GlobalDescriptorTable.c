@@ -4,9 +4,9 @@
 #include "../include/GlobalDescriptorTable.h"
 #include "../../../../library/include/cstring.h"
 
-static gdt_entry_container gdt;
-static gdt_ptr_s gdt_ptr;
-static tss_entry_t tss_entry;
+static gdt_entry_container gdt; // TODO unstatic?
+static gdt_ptr_s gdt_ptr; // TODO unstatic?
+tss_entry_t tss_entry;
 
 
 /*
@@ -78,10 +78,7 @@ static void Gdt_InstallEntries()
  */
 static void Gdt_WriteTssEntry(int32_t num, uint16_t ss0, uint32_t esp0)
 {
-  uint32_t base = (uint32_t) &tss_entry;
-  uint32_t limit = base + sizeof(tss_entry_t);
-
-  Gdt_SetEntry(num, base, limit, GDT_TSS, 0x00);
+  uint32_t limit = (uint32_t) &tss_entry + sizeof(tss_entry_t);
 
   memset(&tss_entry, 0, sizeof(tss_entry_t));
 
@@ -90,6 +87,8 @@ static void Gdt_WriteTssEntry(int32_t num, uint16_t ss0, uint32_t esp0)
 
   tss_entry.cs = 0x0b;
   tss_entry.ss = tss_entry.ds = tss_entry.es = tss_entry.fs = tss_entry.gs = 0x13;
+
+  Gdt_SetEntry(num, (uint32_t)&tss_entry, limit, GDT_TSS, 0x00);
 }
 
 /*
@@ -98,16 +97,16 @@ static void Gdt_WriteTssEntry(int32_t num, uint16_t ss0, uint32_t esp0)
 static void Gdt_SetEntry(uint32_t index, uint32_t base, uint32_t limit, uint8_t access,
 		uint8_t gran) {
 
-	gdt.entry[index].limit_low = (limit & 0xFFFF);
+	gdt.entry[index].limit_low   = (limit & 0xFFFF);
 
-	gdt.entry[index].base_low = (base & 0xFFFF);
+	gdt.entry[index].base_low    = (base & 0xFFFF);
 
 	gdt.entry[index].base_middle = (base >> 16) & 0xFF;
 
-	gdt.entry[index].access = access;
+	gdt.entry[index].access      = access;
 
 	gdt.entry[index].granularity = ((limit >> 16) & 0x0F) | ((gran << 4) & 0xF0);
 
-	gdt.entry[index].base_high = (base >> 24) & 0xFF;
+	gdt.entry[index].base_high   = (base >> 24) & 0xFF;
 }
 
